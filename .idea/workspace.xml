@@ -4,7 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee1b783f-c421-4dba-9014-4b388a7dbdda" name="Changes" comment="" />
+    <list default="true" id="ee1b783f-c421-4dba-9014-4b388a7dbdda" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/api/ChallengeBackend/controllers/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api/ChallengeBackend/controllers/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/api/ChallengeBackend/controllers/CharacterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api/ChallengeBackend/controllers/CharacterController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/api/ChallengeBackend/repositories/CharacterRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api/ChallengeBackend/repositories/CharacterRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/api/ChallengeBackend/security/jwt/AuthEntryPointJwt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api/ChallengeBackend/security/jwt/AuthEntryPointJwt.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/api/ChallengeBackend/security/services/CharacterService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api/ChallengeBackend/security/services/CharacterService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/api/ChallengeBackend/security/services/CharacterServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api/ChallengeBackend/security/services/CharacterServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api/ChallengeBackend/controllers/AuthController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/api/ChallengeBackend/controllers/AuthController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api/ChallengeBackend/controllers/CharacterController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/api/ChallengeBackend/controllers/CharacterController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api/ChallengeBackend/payload/request/Mail.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api/ChallengeBackend/security/jwt/AuthEntryPointJwt.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/api/ChallengeBackend/security/jwt/AuthEntryPointJwt.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api/ChallengeBackend/security/services/CharacterService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/api/ChallengeBackend/security/services/CharacterService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api/ChallengeBackend/security/services/CharacterServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/api/ChallengeBackend/security/services/CharacterServiceImpl.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

@@ -19,7 +19,7 @@ public class CharacterController {
     private CharacterService characterService;
 
     @PostMapping("/add")
-    public ResponseEntity<?> CreateCharacter(@Valid @RequestBody CharacterDTO characterDTO) {
+    public ResponseEntity<?> createCharacter(@Valid @RequestBody CharacterDTO characterDTO) {
         if (characterService.isImage(characterDTO.getImage())) {
             return ResponseEntity
                     .badRequest()
@@ -51,6 +51,36 @@ public class CharacterController {
         }*/
     }
 
+    /**
+     * Busca un personaje por id
+     **/
+    @GetMapping("/get/{idPersonaje}")
+    public ResponseEntity<?> readCharacterById(@Valid @PathVariable(value = "idPersonaje") Long idPersonaje) {
+        try {
+            Character getCharacters = characterService.findCharacterById(idPersonaje);
+            return ResponseEntity
+                    .ok()
+                    .body(getCharacters);
+        } catch (Exception exception) {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(new MessageResponse("El personaje con id " + idPersonaje + " no existe"));
+        }
+    }
+
+    /**
+     * Busca todos los personajes que hay en la base de datos
+     **/
+    @GetMapping("/get")
+    public ResponseEntity<?> readCharacter() {
+        return ResponseEntity
+                .ok()
+                .body(characterService.findCharacters());
+    }
+
+    /**
+     * Actualiza un personaje por id
+     **/
     @PutMapping("/update/{idPersonaje}")
     public ResponseEntity<?> updateCharacter(@Valid @RequestBody CharacterDTO characterDTO, @PathVariable(value = "idPersonaje") Long idPersonaje) {
         if (characterService.isImage(characterDTO.getImage())) {
@@ -76,57 +106,20 @@ public class CharacterController {
                 .body(characterResponse);
     }
 
-    @DeleteMapping("/delete/{idPersonaje}") //TODO VERIFICAR SI UN ID NO EXISTE DEVUELVA UNA RESPUESTA
+    /**
+     * Elimina un personaje por id
+     **/
+    @DeleteMapping("/delete/{idPersonaje}")
     public ResponseEntity<?> deleteCharacter(@PathVariable(value = "idPersonaje") Long idPersonaje) {
-        characterService.deleteCharacter(idPersonaje);
-        return ResponseEntity
-                .ok()
-                .body(new MessageResponse("El personaje con id: " + idPersonaje + " se a eliminado"));
-    }
-}
-
-/*
-    public ResponseEntity<?> deleteCharacter(@PathVariable(value = "idPersonaje") Character character) {
-        if (!characterRepository.findByIdPersonaje(character.getIdPersonaje())) {
-            characterService.deleteCharacter(character.getIdPersonaje());
+        try {
+            characterService.deleteCharacter(idPersonaje);
             return ResponseEntity
                     .ok()
-                    .body(new MessageResponse("El personaje con id " + character.getIdPersonaje() + " se a eliminado"));
-        } else {
+                    .body(new MessageResponse("El personaje con id " + idPersonaje + " se ha eliminado"));
+        } catch (Exception exception) {
             return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("El personaje no existe"));
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(new MessageResponse("El personaje con id " + idPersonaje + " no existe"));
         }
-    }*/
-
-/*@PostMapping("/add")
-    public ResponseEntity<?> addCharacter(@Valid @RequestBody CharacterDTO characterDTO) {
-        if (characterRepository.existsByImage(characterDTO.getImage())) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Error: esta imagen ya esta en uso"));
-        }
-        if (characterRepository.existsByName(characterDTO.getName())) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Error: esta nombre ya esta en uso"));
-        }
-        if (characterRepository.existsByHistory(characterDTO.getHistory())) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Error: esta historia ya esta en uso"));
-        }
-
-        //Guarda los datos en la base de datos
-       /* Character characters = new Character(
-                addRequest.getImage(),
-                addRequest.getName(),
-                addRequest.getAge(),
-                addRequest.getWeight(),
-                addRequest.getHistory(),
-                addRequest.getMovies());
-
- characterRepository.save(characters);
-        return ResponseEntity
-                .ok()
-                .body(characters);*/
+    }
+}

@@ -88,6 +88,7 @@ public class AuthController {
                 signUpRequest.getEmail(),
                 encoder.encode(signUpRequest.getPassword()));
 
+        //TODO; VERIFICAR SI AUN SE SIGUEN ENVIANDO LOS CORREOS DE BIENVENIDA (ME CANCELARON LA CUENTA)
         //enviar mensaje de bienvenida
         mailService.sendTextEmail(signUpRequest.getEmail());
 

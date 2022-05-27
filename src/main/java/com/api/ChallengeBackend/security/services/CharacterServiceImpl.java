@@ -20,23 +20,6 @@ public class CharacterServiceImpl implements CharacterService {
     CharacterRepository characterRepository;
 
     @Override
-    public List<Character> getCharacter() {
-        return characterRepository.findAll();
-    }
-
-    @Override
-    public Character addCharacter(CharacterDTO characterDTO) {
-        Character characters = new Character(
-                characterDTO.getImage(),
-                characterDTO.getName(),
-                characterDTO.getAge(),
-                characterDTO.getWeight(),
-                characterDTO.getHistory(),
-                characterDTO.getMovies());
-        return characterRepository.save(characters);
-    }
-
-    @Override
     public boolean isImage(String image) {
         return characterRepository.existsByImage(image);
     }
@@ -52,8 +35,27 @@ public class CharacterServiceImpl implements CharacterService {
     }
 
     @Override
-    public void saveCharacter(Character character) {
-        characterRepository.save(character);
+    public Character addCharacter(CharacterDTO characterDTO) {
+        Character characters = new Character(
+                characterDTO.getImage(),
+                characterDTO.getName(),
+                characterDTO.getAge(),
+                characterDTO.getWeight(),
+                characterDTO.getHistory(),
+                characterDTO.getMovies());
+        return characterRepository.save(characters);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Character findCharacterById(Long idPersonaje) {
+        return characterRepository.findById(idPersonaje)
+                .orElseThrow(() -> new ResourceNotFoundException("Character", "idPersonaje", idPersonaje));
+    }
+
+    @Override
+    public List<Character> findCharacters() {
+        return characterRepository.findAll();
     }
 
     @Override
@@ -66,6 +68,7 @@ public class CharacterServiceImpl implements CharacterService {
         character.setAge(characterDTO.getAge());
         character.setWeight(characterDTO.getWeight());
         character.setHistory(character.getHistory());
+        // character.setMovies(character.getMovies());
         return characterRepository.save(character);
     }
 
@@ -74,12 +77,6 @@ public class CharacterServiceImpl implements CharacterService {
         Character character = characterRepository.findById(idPersonaje)
                 .orElseThrow(() -> new ResourceNotFoundException("Character", "idPersonaje", idPersonaje));
         characterRepository.delete(character);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public Character findCharacter(Character character) {
-        return characterRepository.findById(character.getIdPersonaje()).orElse(null);
     }
 
     // Convierte entidad a DTO

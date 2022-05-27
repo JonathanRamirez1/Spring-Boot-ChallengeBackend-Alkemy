@@ -7,20 +7,13 @@ import java.util.List;
 
 public interface CharacterService {
 
-    public List<Character> getCharacter();
-
-    public Character addCharacter(CharacterDTO characterDTO);
-
     public boolean isImage(String image);
     public boolean isName(String name);
     public boolean isHistory(String history);
 
-    public void saveCharacter(Character character);
-
+    public Character addCharacter(CharacterDTO characterDTO);
+    public Character findCharacterById(Long idPersonaje);
+    public List<Character> findCharacters();
     public Character updateCharacter(CharacterDTO characterDTO, Long idPersonaje);
-
     public void deleteCharacter(Long idPersonaje);
-
-
-    public Character findCharacter(Character character);
 }
