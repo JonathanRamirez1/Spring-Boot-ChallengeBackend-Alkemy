@@ -8,8 +8,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CharacterServiceImpl implements CharacterService {
@@ -17,7 +17,7 @@ public class CharacterServiceImpl implements CharacterService {
     private ModelMapper modelMapper;
 
     @Autowired
-    CharacterRepository characterRepository;
+    private CharacterRepository characterRepository;
 
     @Override
     public boolean isImage(String image) {
@@ -51,6 +51,18 @@ public class CharacterServiceImpl implements CharacterService {
     public Character findCharacterById(Long idPersonaje) {
         return characterRepository.findById(idPersonaje)
                 .orElseThrow(() -> new ResourceNotFoundException("Character", "idPersonaje", idPersonaje));
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Character> findCharacterByName(String name) {
+        return characterRepository.findByName(name);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Character> findCharacterByAge(Integer age) {
+        return characterRepository.findAllByAge(age);
     }
 
     @Override

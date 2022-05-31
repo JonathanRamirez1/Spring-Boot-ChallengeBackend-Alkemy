@@ -3,36 +3,25 @@ package com.api.ChallengeBackend.dto;
 import com.api.ChallengeBackend.models.Movie;
 import lombok.Data;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Data
-public class CharacterDTO {
+public class GenderDTO {
 
-    private Long idPersonaje;
-
-    @NotEmpty
-    @Size(max = 100)
-    private String image;
+    private Long idGender;
 
     @NotEmpty
     @Size(max = 50)
     private String name;
 
-    @NotNull
-    private Integer age;
-
-    @NotNull
-    private float weight;
-
     @NotEmpty
-    @Size(max = 200)
-    private String history;
+    @Size(max = 100)
+    private String image;
 
     private Set<Movie> movies;
 
-    public CharacterDTO() {
+    public GenderDTO() {
         super();
     }
 }

@@ -1,10 +1,7 @@
 package com.api.ChallengeBackend.models;
 
 import lombok.Data;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,7 +9,6 @@ import java.util.Set;
 @Entity
 @Table(name = "genero",
         uniqueConstraints = {
-        @UniqueConstraint(columnNames = "name"),
         @UniqueConstraint(columnNames = "image")
 })
 public class Gender {
@@ -21,17 +17,21 @@ public class Gender {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idGender;
 
-    @NotBlank
-    @Size(max = 50)
     private String name;
 
-    @NotBlank
-    @Size(max = 100)
     private String image;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "genero_peliculas",
             joinColumns = @JoinColumn(name = "genero_id"),
             inverseJoinColumns = @JoinColumn(name = "pelicula_id"))
-    private Set<Character> movies = new HashSet<>();
+    private Set<Movie> movies = new HashSet<>();
+
+    public Gender() {}
+
+    public Gender(String name, String image, Set<Movie> movies) {
+        this.name = name;
+        this.image = image;
+        this.movies = movies;
+    }
 }

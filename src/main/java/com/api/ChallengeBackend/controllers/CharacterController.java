@@ -2,6 +2,8 @@ package com.api.ChallengeBackend.controllers;
 
 import com.api.ChallengeBackend.dto.CharacterDTO;
 import com.api.ChallengeBackend.models.Character;
+import com.api.ChallengeBackend.models.Movie;
+import com.api.ChallengeBackend.payload.response.CharacterImgNameResponse;
 import com.api.ChallengeBackend.payload.response.MessageResponse;
 import com.api.ChallengeBackend.security.services.CharacterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +12,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 @RestController
-@RequestMapping("/home")
+@RequestMapping("/characters")
 public class CharacterController {
 
     @Autowired
@@ -51,16 +57,26 @@ public class CharacterController {
         }*/
     }
 
-    /**
-     * Busca un personaje por id
-     **/
-    @GetMapping("/get/{idPersonaje}")
-    public ResponseEntity<?> readCharacterById(@Valid @PathVariable(value = "idPersonaje") Long idPersonaje) {
+    /**Muestra el detalle del personaje**/
+    @GetMapping("/detail")
+    public ResponseEntity<?> readCharacterById(@Valid @RequestParam(required = false, value = "idPersonaje") Long idPersonaje) {
         try {
-            Character getCharacters = characterService.findCharacterById(idPersonaje);
-            return ResponseEntity
-                    .ok()
-                    .body(getCharacters);
+            /**
+             * Busca un personaje por id
+             **/
+            if (idPersonaje != null) {
+                Character getCharacters = characterService.findCharacterById(idPersonaje);
+                return ResponseEntity
+                        .ok()
+                        .body(getCharacters);
+            } else {
+                /**
+                 * Busca todos los personajes que hay en la base de datos
+                 **/
+                return ResponseEntity
+                        .ok()
+                        .body(characterService.findCharacters());
+            }
         } catch (Exception exception) {
             return ResponseEntity
                     .status(HttpStatus.NOT_FOUND)
@@ -68,14 +84,112 @@ public class CharacterController {
         }
     }
 
-    /**
-     * Busca todos los personajes que hay en la base de datos
-     **/
-    @GetMapping("/get")
+    //TOODO COMPROBAR SI DEJAR LOS DOS METODOS O UNO SOLO
+   /* @GetMapping("/get")
     public ResponseEntity<?> readCharacter() {
         return ResponseEntity
                 .ok()
                 .body(characterService.findCharacters());
+    }*/
+
+    /**
+     * Busca un personaje por nombre
+     **/
+    //TODO ESTO FUNCIONA DE MARAVILLA, NO BORRAR
+    @GetMapping
+    public ResponseEntity<?> getCharacterByName(@Valid @RequestParam(required = false, value = "name") String name) {
+        List<Character> characterByName = characterService.findCharacterByName(name);
+        List<CharacterImgNameResponse> characterResponses = new ArrayList<>();
+
+        for (Character characterTemp : characterByName) {
+            CharacterImgNameResponse characterImgNameResponse = new CharacterImgNameResponse(characterTemp.getName(), characterTemp.getImage());
+            characterResponses.add(characterImgNameResponse);
+        }
+
+        if (!characterByName.isEmpty()) {
+            return ResponseEntity
+                    .ok()
+                    .body(characterResponses);
+        } else {
+            if (name != null) {
+                return ResponseEntity
+                        .status(HttpStatus.NOT_FOUND)
+                        .body(new MessageResponse("El personaje con nombre " + name + " no existe"));
+            } else {
+                return ResponseEntity
+                        .badRequest()
+                        .body(new MessageResponse("Verifique que la solicitud este bien"));
+            }
+        }
+    }
+
+    /**
+     * Busca un personaje por edad
+     **/
+    //TODO ESTO FUNCIONA DE MARAVILLA, NO BORRAR
+    @GetMapping
+    public ResponseEntity<?> getCharacterByAge(@Valid @RequestParam(required = false, value = "age") Integer age) {
+        List<Character> characterByAge = characterService.findCharacterByAge(age);
+        List<CharacterImgNameResponse> characterResponses = new ArrayList<>();
+
+        for (Character characterTemp : characterByAge) {
+            CharacterImgNameResponse characterImgNameResponse = new CharacterImgNameResponse(characterTemp.getName(), characterTemp.getImage());
+            characterResponses.add(characterImgNameResponse);
+        }
+
+        if (!characterByAge.isEmpty()) {
+            return ResponseEntity
+                    .ok()
+                    .body(characterResponses);
+        } else {
+            if (age != null) {
+                return ResponseEntity
+                        .status(HttpStatus.NOT_FOUND)
+                        .body(new MessageResponse("El personaje con edad " + age + " no existe"));
+            } else {
+                return ResponseEntity
+                        .badRequest()
+                        .body(new MessageResponse("Verifique que la solicitud este bien"));
+            }
+        }
+    }
+
+    /**
+     * Busca un personaje por id de pelicula
+     **/
+    @GetMapping
+    public ResponseEntity<?> getCharacterByMovies(@Valid @RequestParam(required = false, value = "movies") Integer idMovie) {
+        List<Character> characterList = characterService.findCharacters();//Se traen todos los personajes
+        List<CharacterImgNameResponse> charactersMovie = new ArrayList<>(); //Se crea un lista para llenarla y luego se retorna
+        for (Character characterTemp : characterList) {
+            Set<Movie> moviesCharacter = characterTemp.getMovies(); //Cuando se recorre la lsiat de personajes, se le obtiene su lista de peliculas internas
+
+            for (Movie movie : moviesCharacter) {
+                if (Objects.equals(movie.getIdMovie(), idMovie)) {
+                    //Si se encuentra un id de pelicula que coincida con el id que llego se agrega
+
+                    //Se crea el nuevo objecto para agregarlo a la lista
+                    CharacterImgNameResponse personajePulido = new CharacterImgNameResponse(characterTemp.getName(), characterTemp.getImage());
+                    charactersMovie.add(personajePulido);
+                }
+            }
+        }
+
+        if (!characterList.isEmpty()) {
+            return ResponseEntity
+                    .ok()
+                    .body(charactersMovie);
+        } else {
+            if (idMovie != null) {
+                return ResponseEntity
+                        .status(HttpStatus.NOT_FOUND)
+                        .body(new MessageResponse("El personaje con id de pelicula " + idMovie + " no existe"));
+            } else {
+                return ResponseEntity
+                        .badRequest()
+                        .body(new MessageResponse("Verifique que la solicitud este bien"));
+            }
+        }
     }
 
     /**
