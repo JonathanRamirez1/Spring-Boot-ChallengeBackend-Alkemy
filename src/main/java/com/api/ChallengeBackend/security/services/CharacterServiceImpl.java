@@ -80,7 +80,6 @@ public class CharacterServiceImpl implements CharacterService {
         character.setAge(characterDTO.getAge());
         character.setWeight(characterDTO.getWeight());
         character.setHistory(character.getHistory());
-        // character.setMovies(character.getMovies());
         return characterRepository.save(character);
     }
 

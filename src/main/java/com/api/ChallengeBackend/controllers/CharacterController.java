@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,9 @@ public class CharacterController {
 
     @Autowired
     private CharacterService characterService;
+
+    @Autowired
+    HttpServletRequest request;
 
     @PostMapping("/add")
     public ResponseEntity<?> createCharacter(@Valid @RequestBody CharacterDTO characterDTO) {
@@ -57,7 +61,9 @@ public class CharacterController {
         }*/
     }
 
-    /**Muestra el detalle del personaje**/
+    /**
+     * Muestra el detalle del personaje
+     **/
     @GetMapping("/detail")
     public ResponseEntity<?> readCharacterById(@Valid @RequestParam(required = false, value = "idPersonaje") Long idPersonaje) {
         try {
@@ -84,20 +90,30 @@ public class CharacterController {
         }
     }
 
-    //TOODO COMPROBAR SI DEJAR LOS DOS METODOS O UNO SOLO
-   /* @GetMapping("/get")
-    public ResponseEntity<?> readCharacter() {
+    //TODO VERIFICAR QUE SE VALIDE LA RESPUESTA SI LA QUERY ESTA MAL EN CADA METODO (en el else)
+    @GetMapping
+    public ResponseEntity<?> filtersForCharacters(@Valid @RequestParam(required = false, value = "name") String name,
+                                                  @Valid @RequestParam(required = false, value = "age") Integer age,
+                                                  @Valid @RequestParam(required = false, value = "movies") Integer idMovie) {
+
+        if (name != null) {
+            return getCharacterByName(name);
+        }
+        if (age != null) {
+            return getCharacterByAge(age);
+        }
+        if (idMovie != null) {
+            return getCharacterByMovies(idMovie);
+        }
         return ResponseEntity
                 .ok()
                 .body(characterService.findCharacters());
-    }*/
+    }
 
     /**
      * Busca un personaje por nombre
      **/
-    //TODO ESTO FUNCIONA DE MARAVILLA, NO BORRAR
-    @GetMapping
-    public ResponseEntity<?> getCharacterByName(@Valid @RequestParam(required = false, value = "name") String name) {
+    public ResponseEntity<?> getCharacterByName(String name) {
         List<Character> characterByName = characterService.findCharacterByName(name);
         List<CharacterImgNameResponse> characterResponses = new ArrayList<>();
 
@@ -126,9 +142,7 @@ public class CharacterController {
     /**
      * Busca un personaje por edad
      **/
-    //TODO ESTO FUNCIONA DE MARAVILLA, NO BORRAR
-    @GetMapping
-    public ResponseEntity<?> getCharacterByAge(@Valid @RequestParam(required = false, value = "age") Integer age) {
+    public ResponseEntity<?> getCharacterByAge(Integer age) {
         List<Character> characterByAge = characterService.findCharacterByAge(age);
         List<CharacterImgNameResponse> characterResponses = new ArrayList<>();
 
@@ -157,8 +171,7 @@ public class CharacterController {
     /**
      * Busca un personaje por id de pelicula
      **/
-    @GetMapping
-    public ResponseEntity<?> getCharacterByMovies(@Valid @RequestParam(required = false, value = "movies") Integer idMovie) {
+    public ResponseEntity<?> getCharacterByMovies(Integer idMovie) {
         List<Character> characterList = characterService.findCharacters();//Se traen todos los personajes
         List<CharacterImgNameResponse> charactersMovie = new ArrayList<>(); //Se crea un lista para llenarla y luego se retorna
         for (Character characterTemp : characterList) {
