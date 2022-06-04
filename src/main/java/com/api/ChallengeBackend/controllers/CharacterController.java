@@ -6,11 +6,12 @@ import com.api.ChallengeBackend.models.Movie;
 import com.api.ChallengeBackend.payload.response.CharacterImgNameResponse;
 import com.api.ChallengeBackend.payload.response.MessageResponse;
 import com.api.ChallengeBackend.security.services.CharacterService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -28,23 +29,25 @@ public class CharacterController {
     @Autowired
     HttpServletRequest request;
 
+    private static final Logger logger = LoggerFactory.getLogger(CharacterController.class);
+
     @PostMapping("/add")
     public ResponseEntity<?> createCharacter(@Valid @RequestBody CharacterDTO characterDTO) {
-        if (characterService.isImage(characterDTO.getImage())) {
+      /*  if (characterService.isImage(characterDTO.getImage())) {
             return ResponseEntity
                     .badRequest()
-                    .body(new MessageResponse("Error: esta imagen ya esta en uso"));
+                    .body(new MessageResponse("Error: La imagen de Personaje ya esta en uso"));
         }
         if (characterService.isName(characterDTO.getName())) {
             return ResponseEntity
                     .badRequest()
-                    .body(new MessageResponse("Error: esta nombre ya esta en uso"));
+                    .body(new MessageResponse("Error: El nombre de Personaje ya esta en uso"));
         }
         if (characterService.isHistory(characterDTO.getHistory())) {
             return ResponseEntity
                     .badRequest()
-                    .body(new MessageResponse("Error: esta historia ya esta en uso"));
-        }
+                    .body(new MessageResponse("Error: La historia de Personaje ya esta en uso"));
+        }*/
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(characterService.addCharacter(characterDTO));
@@ -90,20 +93,23 @@ public class CharacterController {
         }
     }
 
-    //TODO VERIFICAR QUE SE VALIDE LA RESPUESTA SI LA QUERY ESTA MAL EN CADA METODO (en el else)
     @GetMapping
     public ResponseEntity<?> filtersForCharacters(@Valid @RequestParam(required = false, value = "name") String name,
                                                   @Valid @RequestParam(required = false, value = "age") Integer age,
-                                                  @Valid @RequestParam(required = false, value = "movies") Integer idMovie) {
+                                                  @Valid @RequestParam(required = false, value = "idMovie") Integer idMovie) {
 
-        if (name != null) {
-            return getCharacterByName(name);
-        }
-        if (age != null) {
-            return getCharacterByAge(age);
-        }
-        if (idMovie != null) {
-            return getCharacterByMovies(idMovie);
+        if (request.getQueryString() != null) {
+            if (name != null) {
+                return getCharacterByName(name);
+            } else if (age != null) {
+                return getCharacterByAge(age);
+            } else if (idMovie != null) {
+                return getCharacterByMovies(idMovie);
+            } else {
+                return ResponseEntity
+                        .badRequest()
+                        .body(new MessageResponse("Verifique que la solicitud este bien"));
+            }
         }
         return ResponseEntity
                 .ok()
@@ -127,17 +133,12 @@ public class CharacterController {
                     .ok()
                     .body(characterResponses);
         } else {
-            if (name != null) {
-                return ResponseEntity
-                        .status(HttpStatus.NOT_FOUND)
-                        .body(new MessageResponse("El personaje con nombre " + name + " no existe"));
-            } else {
-                return ResponseEntity
-                        .badRequest()
-                        .body(new MessageResponse("Verifique que la solicitud este bien"));
-            }
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(new MessageResponse("El personaje con nombre " + name + " no existe"));
         }
     }
+
 
     /**
      * Busca un personaje por edad
@@ -156,15 +157,9 @@ public class CharacterController {
                     .ok()
                     .body(characterResponses);
         } else {
-            if (age != null) {
-                return ResponseEntity
-                        .status(HttpStatus.NOT_FOUND)
-                        .body(new MessageResponse("El personaje con edad " + age + " no existe"));
-            } else {
-                return ResponseEntity
-                        .badRequest()
-                        .body(new MessageResponse("Verifique que la solicitud este bien"));
-            }
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(new MessageResponse("El personaje con edad " + age + " no existe"));
         }
     }
 
@@ -175,7 +170,7 @@ public class CharacterController {
         List<Character> characterList = characterService.findCharacters();//Se traen todos los personajes
         List<CharacterImgNameResponse> charactersMovie = new ArrayList<>(); //Se crea un lista para llenarla y luego se retorna
         for (Character characterTemp : characterList) {
-            Set<Movie> moviesCharacter = characterTemp.getMovies(); //Cuando se recorre la lsiat de personajes, se le obtiene su lista de peliculas internas
+            Set<Movie> moviesCharacter = characterTemp.getMovies(); //Cuando se recorre la lista de personajes, se le obtiene su lista de peliculas internas
 
             for (Movie movie : moviesCharacter) {
                 if (Objects.equals(movie.getIdMovie(), idMovie)) {
@@ -193,15 +188,9 @@ public class CharacterController {
                     .ok()
                     .body(charactersMovie);
         } else {
-            if (idMovie != null) {
-                return ResponseEntity
-                        .status(HttpStatus.NOT_FOUND)
-                        .body(new MessageResponse("El personaje con id de pelicula " + idMovie + " no existe"));
-            } else {
-                return ResponseEntity
-                        .badRequest()
-                        .body(new MessageResponse("Verifique que la solicitud este bien"));
-            }
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(new MessageResponse("El personaje con id de pelicula " + idMovie + " no existe"));
         }
     }
 

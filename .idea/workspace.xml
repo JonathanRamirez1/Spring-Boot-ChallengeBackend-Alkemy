@@ -7,9 +7,21 @@
     <list default="true" id="ee1b783f-c421-4dba-9014-4b388a7dbdda" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/api/ChallengeBackend/controllers/CharacterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api/ChallengeBackend/controllers/CharacterController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/api/ChallengeBackend/models/Movie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api/ChallengeBackend/models/Movie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/api/ChallengeBackend/repositories/CharacterRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api/ChallengeBackend/repositories/CharacterRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/api/ChallengeBackend/repositories/MovieRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api/ChallengeBackend/repositories/MovieRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/api/ChallengeBackend/security/services/CharacterService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api/ChallengeBackend/security/services/CharacterService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/api/ChallengeBackend/security/services/CharacterServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api/ChallengeBackend/security/services/CharacterServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/api/ChallengeBackend/security/services/MovieService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api/ChallengeBackend/security/services/MovieService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/api/ChallengeBackend/security/services/MovieServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api/ChallengeBackend/security/services/MovieServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/api/ChallengeBackend/controllers/CharacterController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/api/ChallengeBackend/controllers/CharacterController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api/ChallengeBackend/models/Movie.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/api/ChallengeBackend/models/Movie.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api/ChallengeBackend/repositories/CharacterRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/api/ChallengeBackend/repositories/CharacterRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api/ChallengeBackend/repositories/MovieRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/api/ChallengeBackend/repositories/MovieRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api/ChallengeBackend/security/services/CharacterService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/api/ChallengeBackend/security/services/CharacterService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/api/ChallengeBackend/security/services/CharacterServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/api/ChallengeBackend/security/services/CharacterServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api/ChallengeBackend/security/services/MovieService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/api/ChallengeBackend/security/services/MovieService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api/ChallengeBackend/security/services/MovieServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/api/ChallengeBackend/security/services/MovieServiceImpl.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +76,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../bancoServices-main/bancoServices-main/bancoAtc" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../disneyApp-master/disneyApp-master" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
@@ -113,5 +125,15 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NumberFormatException" package="java.lang" />
+          <option name="timeStamp" value="2" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

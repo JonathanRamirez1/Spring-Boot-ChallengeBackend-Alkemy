@@ -3,7 +3,6 @@ package com.api.ChallengeBackend.security.services;
 import com.api.ChallengeBackend.dto.CharacterDTO;
 import com.api.ChallengeBackend.models.Character;
 import java.util.List;
-import java.util.Optional;
 
 public interface CharacterService {
 
@@ -18,4 +17,6 @@ public interface CharacterService {
     public List<Character> findCharacters();
     public Character updateCharacter(CharacterDTO characterDTO, Long idPersonaje);
     public void deleteCharacter(Long idPersonaje);
+
+    public List<Character> buscarPorNombre(String name);
 }

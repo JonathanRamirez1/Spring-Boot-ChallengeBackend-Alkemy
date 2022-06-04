@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CharacterServiceImpl implements CharacterService {
@@ -88,6 +87,19 @@ public class CharacterServiceImpl implements CharacterService {
         Character character = characterRepository.findById(idPersonaje)
                 .orElseThrow(() -> new ResourceNotFoundException("Character", "idPersonaje", idPersonaje));
         characterRepository.delete(character);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Character> buscarPorNombre(String name) {
+
+        List<Character> respuesta = characterRepository.buscarPorNombre(name);
+
+        if (respuesta != null) {
+            return respuesta;
+        } else {
+            throw new Error("No se encontró personaje con ese nombre.");
+        }
     }
 
     // Convierte entidad a DTO
