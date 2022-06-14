@@ -5,6 +5,7 @@ import com.api.ChallengeBackend.models.Gender;
 
 public interface GenderService {
 
+    public boolean isName(String name);
     public boolean isImage(String image);
-    public Gender addGender(GenderDTO genderDTO);
+    public Gender addGender(Integer idMovie, GenderDTO genderDTO);
 }

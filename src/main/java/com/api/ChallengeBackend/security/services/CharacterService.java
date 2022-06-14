@@ -7,16 +7,13 @@ import java.util.List;
 public interface CharacterService {
 
     public boolean isImage(String image);
-    public boolean isName(String name);
     public boolean isHistory(String history);
 
-    public Character addCharacter(CharacterDTO characterDTO);
+    public Character addCharacter(Integer idMovie, CharacterDTO characterDTO);
     public Character findCharacterById(Long idPersonaje);
+    public List<Character> findCharacters();
     public List<Character> findCharacterByName(String name);
     public List<Character> findCharacterByAge(Integer age);
-    public List<Character> findCharacters();
     public Character updateCharacter(CharacterDTO characterDTO, Long idPersonaje);
-    public void deleteCharacter(Long idPersonaje);
-
-    public List<Character> buscarPorNombre(String name);
+    public void deleteCharacter(Integer idMovie, Long idPersonaje);
 }

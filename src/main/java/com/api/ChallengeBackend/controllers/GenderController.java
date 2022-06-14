@@ -16,17 +16,20 @@ public class GenderController {
     @Autowired
     private GenderService genderService;
 
-    @PostMapping("/add")
-    public ResponseEntity<?> createGender(@Valid @RequestBody GenderDTO genderDTO) {
+    @PostMapping("/movies/{idMovie}/gender/{idGender}")
+    public ResponseEntity<?> createGender(@PathVariable(value = "idMovie") Integer idMovie, @Valid @RequestBody GenderDTO genderDTO) {
+        if (genderService.isName(genderDTO.getName())) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: este nombre de genero ya existe"));
+        }
         if (genderService.isImage(genderDTO.getImage())) {
             return ResponseEntity
                     .badRequest()
                     .body(new MessageResponse("Error: esta imagen de genero ya existe"));
         }
-
-        //TODO VERIFICAR PORQUE SE REVIENTA SI PONGO UN NAME IGUAL SIENDO QUE MO LE HE PUESTO UNIQUECONSTARAIN
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(genderService.addGender(genderDTO));
+                .body(genderService.addGender(idMovie, genderDTO));
     }
 }

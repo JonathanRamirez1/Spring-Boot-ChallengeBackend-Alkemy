@@ -1,14 +1,12 @@
 package com.api.ChallengeBackend.models;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
-@Data
 @Entity
 @Table(name = "genero",
         uniqueConstraints = {
+        @UniqueConstraint(columnNames = "name"),
         @UniqueConstraint(columnNames = "image")
 })
 public class Gender {
@@ -21,17 +19,47 @@ public class Gender {
 
     private String image;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "genero_peliculas",
-            joinColumns = @JoinColumn(name = "genero_id"),
-            inverseJoinColumns = @JoinColumn(name = "pelicula_id"))
-    private Set<Movie> movies = new HashSet<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idMovie")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) //Ignora la serializacion
+    private Movie movie;
+
+    public Long getIdGender() {
+        return idGender;
+    }
+
+    public void setIdGender(Long idGender) {
+        this.idGender = idGender;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public Movie getMovie() {
+        return movie;
+    }
+
+    public void setMovie(Movie movie) {
+        this.movie = movie;
+    }
 
     public Gender() {}
 
-    public Gender(String name, String image, Set<Movie> movies) {
+    public Gender(String name, String image) {
         this.name = name;
         this.image = image;
-        this.movies = movies;
     }
 }

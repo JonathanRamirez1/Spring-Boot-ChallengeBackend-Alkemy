@@ -1,13 +1,10 @@
 package com.api.ChallengeBackend.dto;
 
 import com.api.ChallengeBackend.models.Movie;
-import lombok.Data;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Set;
 
-@Data
 public class CharacterDTO {
 
     private Long idPersonaje;
@@ -30,7 +27,63 @@ public class CharacterDTO {
     @Size(max = 200)
     private String history;
 
-    private Set<Movie> movies;
+    private Movie movie;
+
+    public Long getIdPersonaje() {
+        return idPersonaje;
+    }
+
+    public void setIdPersonaje(Long idPersonaje) {
+        this.idPersonaje = idPersonaje;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public float getWeight() {
+        return weight;
+    }
+
+    public void setWeight(float weight) {
+        this.weight = weight;
+    }
+
+    public String getHistory() {
+        return history;
+    }
+
+    public void setHistory(String history) {
+        this.history = history;
+    }
+
+    public Movie getMovie() {
+        return movie;
+    }
+
+    public void setMovie(Movie movie) {
+        this.movie = movie;
+    }
 
     public CharacterDTO() {
         super();

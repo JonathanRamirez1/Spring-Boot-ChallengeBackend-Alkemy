@@ -1,12 +1,9 @@
 package com.api.ChallengeBackend.dto;
 
 import com.api.ChallengeBackend.models.Movie;
-import lombok.Data;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-import java.util.Set;
 
-@Data
 public class GenderDTO {
 
     private Long idGender;
@@ -19,7 +16,39 @@ public class GenderDTO {
     @Size(max = 100)
     private String image;
 
-    private Set<Movie> movies;
+    private Movie movie;
+
+    public Long getIdGender() {
+        return idGender;
+    }
+
+    public void setIdGender(Long idGender) {
+        this.idGender = idGender;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public Movie getMovie() {
+        return movie;
+    }
+
+    public void setMovie(Movie movie) {
+        this.movie = movie;
+    }
 
     public GenderDTO() {
         super();
