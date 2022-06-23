@@ -6,13 +6,10 @@ import com.api.ChallengeBackend.models.Movie;
 import com.api.ChallengeBackend.payload.response.CharacterImgNameResponse;
 import com.api.ChallengeBackend.payload.response.MessageResponse;
 import com.api.ChallengeBackend.security.services.CharacterService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -28,8 +25,6 @@ public class CharacterController {
 
     @Autowired
     HttpServletRequest requestCharacter;
-
-    private static final Logger logger = LoggerFactory.getLogger(CharacterController.class);
 
     @PostMapping("/movies/{idMovie}/characters/{idCharacter}")
     public ResponseEntity<?> createCharacter(@PathVariable(value = "idMovie") Integer idMovie, @Valid @RequestBody CharacterDTO characterDTO) {
@@ -180,23 +175,6 @@ public class CharacterController {
      **/
     @PutMapping("/update/{idPersonaje}")
     public ResponseEntity<?> updateCharacter(@Valid @RequestBody CharacterDTO characterDTO, @PathVariable(value = "idPersonaje") Long idPersonaje) {
-        if (characterService.isImage(characterDTO.getImage())) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Error: es la misma imagen"));
-        }
-       /* if (characterService.isName(characterDTO.getName())) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Error: es el mismo nombre"));
-        }*/
-        if (characterService.isHistory(characterDTO.getHistory())) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Error: es la misma historia"));
-        }
-
-        //Actualiza los datos en la base de datos
         Character characterResponse = characterService.updateCharacter(characterDTO, idPersonaje);
         return ResponseEntity
                 .ok()
@@ -220,36 +198,3 @@ public class CharacterController {
         }
     }
 }
-
-/*@PostMapping("/add")
-    public ResponseEntity<?> createCharacter(@Valid @RequestBody CharacterDTO characterDTO) {
-        if (characterService.isImage(characterDTO.getImage())) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Error: La imagen de Personaje ya esta en uso"));
-        }
-        if (characterService.isName(characterDTO.getName())) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Error: El nombre de Personaje ya esta en uso"));
-        }
-        if (characterService.isHistory(characterDTO.getHistory())) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Error: La historia de Personaje ya esta en uso"));
-        }
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(characterService.addCharacter(characterDTO));
-
-        if (addRequest.getAge() >= 1 && addRequest.getAge() <= 5) {
-           characterRepository.save(characters);
-            return ResponseEntity
-                    .ok()
-                    .body(characters);
-        } else {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("La calificacion debe estar en un rango de 1 a 5"));
-        }
-                }*/

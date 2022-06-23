@@ -36,6 +36,7 @@ public class CharacterServiceImpl implements CharacterService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Character addCharacter(Integer idMovie, CharacterDTO characterDTO) {
         Character character = new Character(
                 characterDTO.getImage(),
@@ -59,6 +60,7 @@ public class CharacterServiceImpl implements CharacterService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Character> findCharacters() {
         return characterRepository.findAll();
     }

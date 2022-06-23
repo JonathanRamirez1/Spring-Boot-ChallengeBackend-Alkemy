@@ -2,9 +2,7 @@ package com.api.ChallengeBackend.dto;
 
 import com.api.ChallengeBackend.models.Character;
 import com.api.ChallengeBackend.models.Gender;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.Date;
 import java.util.Set;
 
@@ -24,6 +22,8 @@ public class MovieDTO {
     private Date timeStamp;
 
     @NotNull
+    @Min(1)
+    @Max(5)
     private int qualification;
 
     private Set<Character> characters;

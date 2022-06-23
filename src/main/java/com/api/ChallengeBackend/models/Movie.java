@@ -1,6 +1,6 @@
 package com.api.ChallengeBackend.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.*;
@@ -12,6 +12,7 @@ import java.util.*;
         @UniqueConstraint(columnNames = "image"),
         @UniqueConstraint(columnNames = "title")
 })
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idMovie")
 public class Movie implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -19,16 +20,11 @@ public class Movie implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idMovie;
-
     private String image;
-
     private String title;
-
     private Date timeStamp;
-
     private int qualification;
 
-    //TODO HACER QUE AL ELIMINAR UNA PELICULA NO SE ELIMINEN SUS PERSONAJES ASOCIADOS
     @OneToMany(mappedBy = "movie", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Character> characters = new HashSet<>();
 

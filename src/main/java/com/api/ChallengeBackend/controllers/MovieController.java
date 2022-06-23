@@ -42,9 +42,15 @@ public class MovieController {
                     .badRequest()
                     .body(new MessageResponse("Error: este titulo de pelicula ya esta en uso"));
         }
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(movieService.saveMovie(movie));
+        if (movie.getQualification() >= 1 && movie.getQualification() <= 5) {
+            return ResponseEntity
+                    .status(HttpStatus.CREATED)
+                    .body(movieService.saveMovie(movie));
+        } else {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: la calificación debe estar entre 1 y 5"));
+        }
     }
 
     /**

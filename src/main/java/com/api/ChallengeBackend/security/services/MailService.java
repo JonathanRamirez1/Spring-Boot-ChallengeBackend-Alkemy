@@ -17,7 +17,7 @@ public class MailService {
         Email from = new Email(Constants.SEND_GRID_SENDER_EMAIL);
         String subject = "Bienvenido";
         Email to = new Email(email);
-        Content content = new Content("text/plain", "Te damos la bienvenida al sitio web de Jonathan Ramirez");
+        Content content = new Content("text/plain", "Te damos la bienvenida a la API con Spring Boot de Jonathan Javier Ramirez");
         Mail mail = new Mail(from, subject, to, content);
 
         SendGrid sendGrid = new SendGrid(Constants.SEND_GRID_API);

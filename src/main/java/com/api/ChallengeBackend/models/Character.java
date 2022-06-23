@@ -1,6 +1,6 @@
 package com.api.ChallengeBackend.models;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import javax.persistence.*;
 
 @Entity
@@ -9,25 +9,20 @@ import javax.persistence.*;
         @UniqueConstraint(columnNames = "image"),
         @UniqueConstraint(columnNames = "history")
 })
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idPersonaje")
 public class Character {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idPersonaje;
-
     private String image;
-
     private String name;
-
     private Integer age;
-
     private float weight;
-
     private String history;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idMovie")
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) //Ignora la serializacion
     private Movie movie;
 
     public Long getIdPersonaje() {
