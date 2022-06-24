@@ -4,6 +4,7 @@ import com.api.ChallengeBackend.util.Constants;
 import com.sendgrid.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import java.io.IOException;
 
@@ -11,6 +12,9 @@ import java.io.IOException;
 public class MailService {
 
     private static final Logger logger = LoggerFactory.getLogger(MailService.class);
+
+    @Value("${api.app.sendGrid}")
+    private String sendGridApiKey;
 
     public String sendTextEmail(String email) throws IOException {
         //El correo electrónico del remitente debe ser el mismo que usamos para crear una verificación de remitente único en SendGrid
@@ -20,7 +24,7 @@ public class MailService {
         Content content = new Content("text/plain", "Te damos la bienvenida a la API con Spring Boot de Jonathan Javier Ramirez");
         Mail mail = new Mail(from, subject, to, content);
 
-        SendGrid sendGrid = new SendGrid(Constants.SEND_GRID_API);
+        SendGrid sendGrid = new SendGrid(sendGridApiKey);
         Request request = new Request();
         request.setMethod(Method.POST);
         request.setEndpoint(Constants.SEND_GRID_ENDPOINT);
