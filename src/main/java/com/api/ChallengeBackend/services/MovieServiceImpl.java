@@ -5,7 +5,6 @@ import com.api.ChallengeBackend.web.exceptions.ResourceNotFoundException;
 import com.api.ChallengeBackend.domain.models.Movie;
 import com.api.ChallengeBackend.dao.repository.CharacterRepository;
 import com.api.ChallengeBackend.dao.repository.MovieRepository;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,8 +18,6 @@ public class MovieServiceImpl implements MovieService {
 
     @Autowired
     private CharacterRepository characterRepository;
-
-    private ModelMapper modelMapper;
 
     @Override
     public boolean isImage(String image) {
@@ -89,15 +86,5 @@ public class MovieServiceImpl implements MovieService {
         Movie movie = movieRepository.findById(idMovie)
                 .orElseThrow(() -> new ResourceNotFoundException("Movie", "idMovie", idMovie));
         movieRepository.delete(movie);
-    }
-
-    // Convierte entidad a DTO
-    private MovieDTO mapDTO(Movie movie) {
-        return modelMapper.map(movie, MovieDTO.class);
-    }
-
-    // Convierte de DTO a Entidad
-    private Movie mapEntity(MovieDTO movieDTO) {
-        return modelMapper.map(movieDTO, Movie.class);
     }
 }

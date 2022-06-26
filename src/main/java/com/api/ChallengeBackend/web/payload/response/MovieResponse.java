@@ -1,7 +1,6 @@
 package com.api.ChallengeBackend.web.payload.response;
 
 import lombok.Data;
-
 import java.util.Date;
 
 @Data

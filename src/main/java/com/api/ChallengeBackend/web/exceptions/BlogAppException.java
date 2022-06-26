@@ -15,13 +15,6 @@ public class BlogAppException extends RuntimeException {
         this.mensaje = mensaje;
     }
 
-    public BlogAppException(HttpStatus estado, String mensaje, String mensaje1) {
-        super();
-        this.estado = estado;
-        this.mensaje = mensaje;
-        this.mensaje = mensaje1;
-    }
-
     public HttpStatus getEstado() {
         return estado;
     }
@@ -37,6 +30,4 @@ public class BlogAppException extends RuntimeException {
     public void setMensaje(String mensaje) {
         this.mensaje = mensaje;
     }
-
 }
-

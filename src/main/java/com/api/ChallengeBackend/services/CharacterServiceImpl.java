@@ -7,7 +7,6 @@ import com.api.ChallengeBackend.domain.models.Character;
 import com.api.ChallengeBackend.domain.models.Movie;
 import com.api.ChallengeBackend.dao.repository.CharacterRepository;
 import com.api.ChallengeBackend.dao.repository.MovieRepository;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -16,8 +15,6 @@ import java.util.List;
 
 @Service
 public class CharacterServiceImpl implements CharacterService {
-
-    private ModelMapper modelMapper;
 
     @Autowired
     private CharacterRepository characterRepository;
@@ -102,15 +99,5 @@ public class CharacterServiceImpl implements CharacterService {
         if (!character.getMovie().getIdMovie().equals(movie.getIdMovie())) {
             throw new BlogAppException(HttpStatus.BAD_REQUEST, "El comentario no pertenece a la publicación");
         }
-    }
-
-    // Convierte entidad a DTO
-    private CharacterDTO mapDTO(Character character) {
-        return modelMapper.map(character, CharacterDTO.class);
-    }
-
-    // Convierte de DTO a Entidad
-    private Character mapEntity(CharacterDTO characterDTO) {
-        return modelMapper.map(characterDTO, Character.class);
     }
 }
