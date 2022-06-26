@@ -5,10 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ee1b783f-c421-4dba-9014-4b388a7dbdda" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/api/ChallengeBackend/services/MailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api/ChallengeBackend/services/MailService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/api/ChallengeBackend/util/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api/ChallengeBackend/util/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/api/ChallengeBackend/services/CharacterServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api/ChallengeBackend/services/CharacterServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/api/ChallengeBackend/web/controllers/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api/ChallengeBackend/web/controllers/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/api/ChallengeBackend/web/controllers/CharacterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api/ChallengeBackend/web/controllers/CharacterController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/api/ChallengeBackend/web/controllers/GenderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api/ChallengeBackend/web/controllers/GenderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/api/ChallengeBackend/web/controllers/MovieController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api/ChallengeBackend/web/controllers/MovieController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/api/ChallengeBackend/web/exceptions/customExceptionAdvice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api/ChallengeBackend/web/exceptions/customExceptionAdvice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/api/ChallengeBackend/web/payload/response/JwtResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api/ChallengeBackend/web/payload/response/JwtResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/api/ChallengeBackend/web/security/jwt/AuthEntryPointJwt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api/ChallengeBackend/web/security/jwt/AuthEntryPointJwt.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api/ChallengeBackend/services/MailService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/api/ChallengeBackend/services/MailService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api/ChallengeBackend/util/Constants.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/api/ChallengeBackend/util/Constants.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api/ChallengeBackend/web/controllers/AuthController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/api/ChallengeBackend/web/controllers/AuthController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api/ChallengeBackend/web/controllers/MovieController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/api/ChallengeBackend/web/controllers/MovieController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api/ChallengeBackend/web/exceptions/customExceptionAdvice.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api/ChallengeBackend/web/payload/response/JwtResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/api/ChallengeBackend/web/payload/response/JwtResponse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api/ChallengeBackend/web/security/jwt/AuthEntryPointJwt.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/api/ChallengeBackend/web/security/jwt/AuthEntryPointJwt.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +79,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/java/com/api/ChallengeBackend" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../AlkemySpring-main/AlkemySpring-main" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
   </component>
   <component name="RecentsManager">

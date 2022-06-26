@@ -44,21 +44,28 @@ public class MovieController {
                     .badRequest()
                     .body(new MessageResponse("Error: este titulo de pelicula ya esta en uso"));
         }
-        if (movie.getQualification() >= 1 && movie.getQualification() <= 5) {
-            return ResponseEntity
-                    .status(HttpStatus.CREATED)
-                    .body(movieService.saveMovie(movie));
-        } else {
+        try {
+            if (movie.getQualification() >= 1 && movie.getQualification() <= 5) {
+                return ResponseEntity
+                        .status(HttpStatus.CREATED)
+                        .body(movieService.saveMovie(movie));
+            } else {
+                return ResponseEntity
+                        .badRequest()
+                        .body(new MessageResponse("Error: la calificación debe estar entre 1 y 5"));
+            }
+        } catch (Exception exception) {
             return ResponseEntity
                     .badRequest()
-                    .body(new MessageResponse("Error: la calificación debe estar entre 1 y 5"));
+                    .body(new MessageResponse("Error: La imagen y/o la historia de personaje ya existe"));
         }
     }
 
     /**
      * Muestra el detalle de la pelicula
      **/
-    @GetMapping("/detail")
+    @PreAuthorize("hasRole('USER')")
+    @GetMapping("/details")
     public ResponseEntity<?> getMovies(@Valid @RequestParam(required = false, value = "idMovie") Integer idMovie) {
         try {
             if (idMovie != null) {
@@ -78,6 +85,7 @@ public class MovieController {
         }
     }
 
+    @PreAuthorize("hasRole('USER')")
     @GetMapping
     public ResponseEntity<?> filterMovies(@RequestParam(required = false, value = "title") String title,
                                           @RequestParam(required = false, value = "idGender") Long idGender,
@@ -120,7 +128,7 @@ public class MovieController {
         } else {
             return ResponseEntity
                     .status(HttpStatus.NOT_FOUND)
-                    .body(new MessageResponse("Error: La pelicula con titulo " + title + " no existe"));
+                    .body(new MessageResponse("No encontrado: La pelicula con titulo " + title + " no existe"));
         }
     }
 
@@ -174,10 +182,16 @@ public class MovieController {
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/update/{idMovie}")
     public ResponseEntity<?> updateMovie(@Valid @RequestBody MovieDTO movieDTO, @PathVariable(value = "idMovie") Integer idMovie) {
-        Movie movieResponse = movieService.updateMovie(movieDTO, idMovie);
-        return ResponseEntity
-                .ok()
-                .body(movieResponse);
+        try {
+            Movie movieResponse = movieService.updateMovie(movieDTO, idMovie);
+            return ResponseEntity
+                    .ok()
+                    .body(movieResponse);
+        } catch (Exception exception) {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(new MessageResponse("No encontrado: La pelicula con id " + idMovie + " no existe para ser actualizada"));
+        }
     }
 
     @PreAuthorize("hasRole('ADMIN')")

@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/gender")
+@RequestMapping("/genders")
 public class GenderController {
 
     @Autowired
     private GenderService genderService;
 
     @PreAuthorize("hasRole('ADMIN')")
-    @PostMapping("/movies/{idMovie}/gender/{idGender}")
+    @PostMapping("/movies/{idMovie}/genders/{idGender}")
     public ResponseEntity<?> createGender(@PathVariable(value = "idMovie") Integer idMovie, @Valid @RequestBody GenderDTO genderDTO) {
         if (genderService.isName(genderDTO.getName())) {
             return ResponseEntity

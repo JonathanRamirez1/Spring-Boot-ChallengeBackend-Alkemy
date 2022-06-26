@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -48,8 +49,8 @@ public class CharacterController {
     /**
      * Muestra el detalle del personaje
      **/
-    @GetMapping("/detail")
-    public ResponseEntity<?> readCharacterById(@Valid @RequestParam(required = false, value = "idPersonaje") Long idPersonaje) {
+    @GetMapping("/details")
+    public ResponseEntity<?> readCharacterById(@Valid @RequestParam(required = false, value = "idCharacter") Long idPersonaje) {
         try {
             /**
              * Busca un personaje por id
@@ -176,20 +177,27 @@ public class CharacterController {
      * Actualiza un personaje por id
      **/
     @PreAuthorize("hasRole('ADMIN')")
-    @PutMapping("/update/{idPersonaje}")
-    public ResponseEntity<?> updateCharacter(@Valid @RequestBody CharacterDTO characterDTO, @PathVariable(value = "idPersonaje") Long idPersonaje) {
-        Character characterResponse = characterService.updateCharacter(characterDTO, idPersonaje);
-        return ResponseEntity
-                .ok()
-                .body(characterResponse);
+    @PutMapping("/update/{idCharacter}")
+    public ResponseEntity<?> updateCharacter(@Valid @RequestBody CharacterDTO characterDTO, @PathVariable(value = "idCharacter") Long idPersonaje) {
+        try {
+            Character characterResponse = characterService.updateCharacter(characterDTO, idPersonaje);
+            return ResponseEntity
+                    .ok()
+                    .body(characterResponse);
+
+        } catch (Exception exception) {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(new MessageResponse("El personaje con id " + idPersonaje + " no existe para ser actualizado"));
+        }
     }
 
     /**
      * Elimina un personaje por id, sin eliminar su pelicula relacionada
      **/
     @PreAuthorize("hasRole('ADMIN')")
-    @DeleteMapping("/movies/{idMovie}/characters/{idPersonaje}")
-    public ResponseEntity<?> deleteCharacter(@PathVariable(value = "idMovie") Integer idMovie, @PathVariable(value = "idPersonaje") Long idPersonaje) {
+    @DeleteMapping("/movies/{idMovie}/characters/{idCharacter}")
+    public ResponseEntity<?> deleteCharacter(@PathVariable(value = "idMovie") Integer idMovie, @PathVariable(value = "idCharacter") Long idPersonaje) {
         try {
             characterService.deleteCharacter(idMovie, idPersonaje);
             return ResponseEntity

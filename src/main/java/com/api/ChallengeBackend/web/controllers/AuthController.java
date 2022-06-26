@@ -14,6 +14,7 @@ import com.api.ChallengeBackend.web.payload.response.MessageResponse;
 import com.api.ChallengeBackend.web.security.jwt.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -64,10 +65,11 @@ public class AuthController {
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList());
 
-        return ResponseEntity.ok(new JwtResponse(jwt,
+        return ResponseEntity.ok(new JwtResponse(
                 userDetails.getId(),
                 userDetails.getUsername(),
                 userDetails.getEmail(),
+                jwt,
                 roles));
     }
 

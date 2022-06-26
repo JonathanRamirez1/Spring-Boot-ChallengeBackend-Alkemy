@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import java.io.IOException;
 
-@ControllerAdvice
+/*@ControllerAdvice
 @RestController
 public class customExceptionAdvice {
 
@@ -19,4 +19,4 @@ public class customExceptionAdvice {
             throws IOException {
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new MessageResponse("No tienes permiso para realizar esta acción"));
     }
-}
+}*/
